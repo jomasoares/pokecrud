@@ -1,26 +1,31 @@
 package com.jomasoares.pokecrud.models;
 
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 /**
- * Base pokemon representation.
+ * Basic pokemon representation.
  */
 @Data
 @AllArgsConstructor
 @Builder
+@Entity
 public class Pokemon {
 
+    @Id
     private Integer id;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private Integer height;
     
+    @Column(nullable = false)
     private Integer weight;
-
-    private List<String> types;
 }
