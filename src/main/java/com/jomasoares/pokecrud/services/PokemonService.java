@@ -1,6 +1,7 @@
 package com.jomasoares.pokecrud.services;
 
 import java.io.StringReader;
+import java.util.List;
 import java.util.Optional;
 
 import javax.json.Json;
@@ -26,11 +27,10 @@ public class PokemonService {
     
     private PokemonRepository pokemonRepository;
 
-    private RestTemplate restTemplate;
+    private RestTemplate restTemplate = new RestTemplate();
 
-    public PokemonService(PokemonRepository pokemonRepository, RestTemplate restTemplate) {
+    public PokemonService(PokemonRepository pokemonRepository) {
         this.pokemonRepository = pokemonRepository;
-        this.restTemplate = restTemplate;
     }
 
     public Pokemon get(Integer id) {
@@ -46,6 +46,10 @@ public class PokemonService {
         throw new NotFoundException("Pokemon not found.");
     }
 
+    public List<Pokemon> getAll() {
+        return pokemonRepository.findAll();
+    }
+
     public Pokemon save(Pokemon p) {
         if(pokemonRepository.findById(p.getId()).isPresent())
             throw new BadRequestException("Pokemon already exists with this id.");
@@ -53,8 +57,8 @@ public class PokemonService {
         return pokemonRepository.save(p);
     }
 
-    public Pokemon update(Pokemon p) {
-        if(pokemonRepository.findById(p.getId()).isEmpty())
+    public Pokemon update(Pokemon p, Integer id) {
+        if(pokemonRepository.findById(id).isEmpty())
             throw new BadRequestException("No pokemon found with this id.");
 
         return pokemonRepository.save(p);
