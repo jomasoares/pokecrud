@@ -1,12 +1,5 @@
 # pokecrud
 
-# BeerStockApi
-
-* [Português](#section-1)
-* [English](#section-2)
-
-## <a name="section-1"></a> Português (Brasil)
-
 Este é o projeto de uma API REST simples, feita em Java.
 
 ## Inicializar o Projeto
@@ -16,7 +9,7 @@ Se você já possui o Maven instalado, execute na linha de comando:
 mvn spring-boot:run 
 ```
 Se não possui, você pode usar o arquivo **mvnw** para a plataforma Linux ou **mvnw.cmd** para Windows, usando o mesmo argumento: **spring-boot:run**. Ambos os arquivos encontram-se na raiz do projeto.
-Para isso, abrir um terminal (linux) ou um PowerShell (Windows) *na pasta do projeto* e execute a linha de comando:
+Para isso, abrir um terminal (linux) ou um PowerShell (Windows) **na pasta do projeto** e execute a linha de comando:
 ```shell script
 # linux
 ./mvnw spring-boot:run
