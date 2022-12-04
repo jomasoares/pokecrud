@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,7 @@ import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import com.jomasoares.pokecrud.exceptions.BadRequestException;
 import com.jomasoares.pokecrud.exceptions.NotFoundException;
 import com.jomasoares.pokecrud.models.Pokemon;
 import com.jomasoares.pokecrud.repositories.PokemonRepository;
@@ -90,5 +92,48 @@ public class PokemonServiceTests {
         Integer invalidId = 83294789;
 
         assertThrows(NotFoundException.class, () -> pokemonService.get(invalidId));
+    }
+
+    @Test
+    void postNewPokemon() {
+        Pokemon newPokemon = exemple;
+
+        when(pokemonRepository.save(newPokemon)).thenReturn(newPokemon);
+        when(pokemonRepository.findById(newPokemon.getId())).thenReturn(Optional.empty());
+
+        Pokemon storedPokemon = pokemonService.save(newPokemon);
+
+        assertEquals(storedPokemon, newPokemon);
+    }
+
+    @Test
+    void postNewPokemonThatAlreadyExists() {
+
+        when(pokemonRepository.findById(exemple.getId())).thenReturn(Optional.of(exemple));
+
+        assertThrows(BadRequestException.class, () -> pokemonService.save(exemple));
+    }
+
+    @Test
+    void updatePokemon() {
+        Pokemon newPokemon = exemple;
+        Integer id = exemple.getId();
+        newPokemon.setName("teste");
+
+        when(pokemonRepository.save(newPokemon)).thenReturn(newPokemon);
+        when(pokemonRepository.findById(newPokemon.getId())).thenReturn(Optional.of(exemple));
+
+        Pokemon storedPokemon = pokemonService.update(newPokemon, id);
+
+        assertEquals(storedPokemon, newPokemon);
+    }
+
+    @Test
+    void updatePokemonThatDoesntExist() {
+        Integer id = exemple.getId();
+
+        when(pokemonRepository.findById(exemple.getId())).thenReturn(Optional.empty());
+
+        assertThrows(BadRequestException.class, () -> pokemonService.update(exemple, id));
     }
 }
