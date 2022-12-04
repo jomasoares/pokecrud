@@ -2,6 +2,8 @@ package com.jomasoares.pokecrud.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,7 +39,7 @@ public class PokemonController {
     }
 
     @PostMapping()
-    public PokemonResponseDto post(@RequestBody PokemonRequestDto dto) {
+    public PokemonResponseDto post(@Valid @RequestBody PokemonRequestDto dto) {
         return PokemonMapper.toResponseDto(pokemonService.save(PokemonMapper.toModel(dto)));
     }
 
