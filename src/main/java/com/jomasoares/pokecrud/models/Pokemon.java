@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * Basic pokemon representation.
+ * Purposely small for simplicity.
  */
 @Data
 @AllArgsConstructor

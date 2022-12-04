@@ -9,6 +9,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ * Dto for pokemon body requests.
+ */
 @Data
 @AllArgsConstructor
 @Builder

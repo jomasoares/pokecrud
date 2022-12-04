@@ -7,6 +7,10 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
 
+/**
+ * Dto that represents a generic body for a response when an exception
+ * is thrown. 
+ */
 @Data
 public class ExceptionResponseDto {
     

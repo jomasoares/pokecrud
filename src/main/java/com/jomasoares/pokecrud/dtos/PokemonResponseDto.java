@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ * Dto for pokemon body responses.
+ */
 @Data
 @AllArgsConstructor
 @Builder

@@ -18,6 +18,9 @@ import com.jomasoares.pokecrud.dtos.PokemonResponseDto;
 import com.jomasoares.pokecrud.mappers.PokemonMapper;
 import com.jomasoares.pokecrud.services.PokemonService;
 
+/**
+ * Controller responsible for pokemon operations.
+ */
 @RestController
 @RequestMapping("/pokemon")
 public class PokemonController {

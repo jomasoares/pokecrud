@@ -14,7 +14,7 @@ import com.jomasoares.pokecrud.exceptions.NotFoundException;
 /**
  * Custom exception handler.
  * 
- * 
+ * Responsible for defining what should be done when a exception is thrown.
  */
 @RestControllerAdvice
 public class ExceptionConfig {

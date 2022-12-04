@@ -9,6 +9,12 @@ import com.jomasoares.pokecrud.dtos.PokemonRequestDto;
 import com.jomasoares.pokecrud.dtos.PokemonResponseDto;
 import com.jomasoares.pokecrud.models.Pokemon;
 
+/**
+ * Class responsible to map a {@link Pokemon Pokemon} model with according dto's.
+ * 
+ * @see {@link PokemonResponseDto PokemonResponseDto}
+ * @see {@link PokemonRequestDto PokemonRequestDto}
+ */
 public class PokemonMapper {
 
     private PokemonMapper() {}

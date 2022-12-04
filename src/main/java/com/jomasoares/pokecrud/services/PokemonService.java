@@ -21,6 +21,9 @@ import com.jomasoares.pokecrud.mappers.PokemonMapper;
 import com.jomasoares.pokecrud.models.Pokemon;
 import com.jomasoares.pokecrud.repositories.PokemonRepository;
 
+/**
+ * Service responsible for pokemon operations.
+ */
 @Service
 public class PokemonService {
 
@@ -70,6 +73,9 @@ public class PokemonService {
         pokemonRepository.deleteById(id);
     }
     
+    /**
+     * Method responsible for consulting pokemon on external API.
+     */
     private Optional<Pokemon> getFromApi(Integer id) {
         try {
 
