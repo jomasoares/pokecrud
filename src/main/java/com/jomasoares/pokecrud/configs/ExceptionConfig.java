@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.jomasoares.pokecrud.dtos.ExceptionResponseDto;
 import com.jomasoares.pokecrud.exceptions.BadRequestException;
+import com.jomasoares.pokecrud.exceptions.InternalServerErrorException;
 import com.jomasoares.pokecrud.exceptions.NotFoundException;
 
 /**
@@ -25,6 +26,12 @@ public class ExceptionConfig {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ExceptionResponseDto> handleNotFound(NotFoundException e) {
 		return defaultResponse(e, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(InternalServerErrorException.class)
+    public ResponseEntity<ExceptionResponseDto> handleInternalServerError(InternalServerErrorException e) {
+		e.printStackTrace();
+        return defaultResponse(e, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(Exception.class)

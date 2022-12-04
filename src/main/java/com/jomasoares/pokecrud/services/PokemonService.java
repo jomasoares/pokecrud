@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.jomasoares.pokecrud.exceptions.BadRequestException;
+import com.jomasoares.pokecrud.exceptions.InternalServerErrorException;
 import com.jomasoares.pokecrud.exceptions.NotFoundException;
 import com.jomasoares.pokecrud.mappers.PokemonMapper;
 import com.jomasoares.pokecrud.models.Pokemon;
@@ -72,8 +73,11 @@ public class PokemonService {
         ResponseEntity<String> response = restTemplate.getForEntity(apiUrl + id, String.class);
         //TODO tratar isso aqui. retornar vazio somente com status code 404.
         JsonObject responseBody = Json.createReader(new StringReader(response.getBody())).readObject();
-        if(response.getStatusCode() != HttpStatus.OK)
+        if(response.getStatusCode() == HttpStatus.NOT_FOUND)
             return Optional.empty();
+
+        if(response.getStatusCode() != HttpStatus.OK)
+            throw new InternalServerErrorException("Error comunicating with external API. Try again later.");
         
         return Optional.of(PokemonMapper.toModel(responseBody));
     }
