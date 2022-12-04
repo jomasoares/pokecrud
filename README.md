@@ -44,12 +44,14 @@ Os endpoints POST e PUT precisam de um body na requisição, em formato JSON, co
     "weight": 14
 } 
 ```
+O id não é gerado automaticamente, portanto ele também é um atributo obrigatório no body!
+
 Se você utiliza o POSTMAN para testar endpoints, você pode baixar a coleção [**clicando aqui**](https://drive.google.com/file/d/1WSkVri6TopcWpnS8vRQ0rz-y8K0qb2og/view?usp=share_link)!
 
 ## Demais informações
 
 * Lembre-se que a versão utilizada do Java é 11!
 * Toda vez que o projeto reinicia, a memória é apagada.
-* Os commits seguiram a convenção do [**Conventional Commits**](https://www.conventionalcommits.org/en/v1.0.0/).
+* Os commits seguem a convenção do [**Conventional Commits**](https://www.conventionalcommits.org/en/v1.0.0/).
 
 
