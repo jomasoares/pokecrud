@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.jomasoares.pokecrud.exceptions.BadRequestException;
@@ -70,15 +71,19 @@ public class PokemonService {
     }
     
     private Optional<Pokemon> getFromApi(Integer id) {
-        ResponseEntity<String> response = restTemplate.getForEntity(apiUrl + id, String.class);
-        //TODO tratar isso aqui. retornar vazio somente com status code 404.
-        JsonObject responseBody = Json.createReader(new StringReader(response.getBody())).readObject();
-        if(response.getStatusCode() == HttpStatus.NOT_FOUND)
-            return Optional.empty();
+        try {
 
-        if(response.getStatusCode() != HttpStatus.OK)
-            throw new InternalServerErrorException("Error comunicating with external API. Try again later.");
+            ResponseEntity<String> response = restTemplate.getForEntity(apiUrl + id, String.class);
+            
+            JsonObject responseBody = Json.createReader(new StringReader(response.getBody())).readObject();
         
-        return Optional.of(PokemonMapper.toModel(responseBody));
+            return Optional.of(PokemonMapper.toModel(responseBody));
+        } catch (HttpClientErrorException e) {
+
+            if(e.getStatusCode() == HttpStatus.NOT_FOUND)
+                return Optional.empty();
+
+            throw new InternalServerErrorException("Error comunicating with external API. Try again later.");
+        }
     }
 }
